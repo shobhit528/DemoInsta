@@ -60,7 +60,7 @@ class _MyGeoLocationState extends State<MyGeoLocation> {
             SizedBox(
               height: 60,
             ),
-            Row(
+            /*Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RaisedButton(
@@ -108,7 +108,7 @@ class _MyGeoLocationState extends State<MyGeoLocation> {
                   },
                 ),
               ],
-            ),
+            ),*/
             SizedBox(
               height: 100,
             ),

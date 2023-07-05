@@ -75,6 +75,7 @@ class LoginController extends GetxController implements VerifyAuth {
   @override
   verificationFailed(FirebaseAuthException e) {
     Get.snackbar(e.code, e.message.toString());
+    print(e.message);
   }
 }
 

@@ -193,7 +193,7 @@ Widget ProfielBanner({String? str}) => Container(
                   Expanded(
                       child: Container(
                     padding: EdgeInsets.only(right: 30),
-                    child: Column(children: [
+                    child:  Column(children: [
                       Text("32k",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22)),

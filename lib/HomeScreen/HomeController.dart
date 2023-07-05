@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tsttech/HomeScreen/ViewStatus.dart';
 
 class HomeController extends GetxController {
   RxList<User> list = <User>[
@@ -20,6 +21,13 @@ class HomeController extends GetxController {
         imageUrl: "assets/images/image_two.png",
         color: Colors.blueAccent.shade100)
   ].obs;
+
+  onClickStatus(User user) => showDialog(
+        context: Get.context!,
+        builder: (context) =>  StatusScreen(imageUrl:user.imageUrl),
+      );
+
+
 }
 
 class User {

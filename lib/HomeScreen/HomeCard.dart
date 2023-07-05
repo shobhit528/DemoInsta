@@ -62,13 +62,13 @@ class HomeCard extends StatelessWidget {
                             ),
                             flex: 1),
                       ]),
-                  Column(
+                   Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Wrap(
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
-                              Icon(Icons.whatsapp, color: Colors.green),
+                              Icon(Icons.abc, color: Colors.green),
                               Text("+91 9876543210")
                             ]),
                         SizedBox(
@@ -79,6 +79,7 @@ class HomeCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
+                                  flex: 1,
                                   child: Row(children: [
                                     Expanded(
                                         child: Icon(
@@ -86,9 +87,9 @@ class HomeCard extends StatelessWidget {
                                       color: Colors.black,
                                     )),
                                     Expanded(child: Text("51"))
-                                  ]),
-                                  flex: 1),
+                                  ])),
                               Expanded(
+                                  flex: 1,
                                   child: Row(
                                     children: [
                                       Expanded(
@@ -97,25 +98,24 @@ class HomeCard extends StatelessWidget {
                                       )),
                                       Expanded(child: Text("50"))
                                     ],
-                                  ),
-                                  flex: 1),
+                                  )),
                               Expanded(
+                                  flex: 1,
                                   child: Row(
                                     children: [
                                       Expanded(child: Icon(Icons.send)),
                                       Expanded(child: Text("100"))
                                     ],
-                                  ),
-                                  flex: 1),
+                                  )),
                               Expanded(
+                                  flex: 1,
                                   child: Row(children: [
                                     Expanded(
                                         child: Icon(
                                       Icons.bookmark_border,
                                     )),
                                     Expanded(child: Text("100"))
-                                  ]),
-                                  flex: 1),
+                                  ])),
                             ]),
                         SizedBox(
                           height: 5,

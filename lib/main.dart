@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: isLoggedIn ? BottomTabView() : LoginScreen(),
+      // home:  BottomTabView(),
       // home: MyGeoLocation(title: "MYGeo"),
     );
   }

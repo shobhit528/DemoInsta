@@ -6,7 +6,7 @@ import 'LoginView.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(child: StreamBuilder(builder: (context, snapshot) => Text("data")))
+
     return LoginView();
   }
 }

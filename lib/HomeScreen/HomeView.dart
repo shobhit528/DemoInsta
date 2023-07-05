@@ -31,7 +31,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
+        actions: const [
           Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
@@ -50,15 +50,18 @@ class HomeView extends StatelessWidget {
             SizedBox(
                 height: 100,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Obx(() => ListView(
                       scrollDirection: Axis.horizontal,
                       children: homecontroller.list
                           .map<Widget>((element) => Padding(
-                                padding: EdgeInsets.only(right: 15),
-                                child:new CustomImageView(
-                                    element.imageUrl,
-                                    name: element.name, showAddIcon: false,networkImage: false,color: element.color),
+                                padding: const EdgeInsets.only(right: 15),
+                                child: CustomImageView(element.imageUrl,
+                                    onTap: ()=>homecontroller.onClickStatus(element),
+                                    name: element.name,
+                                    showAddIcon: false,
+                                    networkImage: false,
+                                    color: element.color),
                               ))
                           .toList())),
                 )),
