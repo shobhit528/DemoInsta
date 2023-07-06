@@ -9,7 +9,7 @@ import 'HomeCard.dart';
 class HomeView extends StatelessWidget {
   final homecontroller = HomeController();
 
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
               color: Colors.grey.shade300),
           child: TextFormField(
             controller: controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               hintText: "Mobile Number",
               prefixIcon: Icon(Icons.search),
@@ -65,11 +65,12 @@ class HomeView extends StatelessWidget {
                               ))
                           .toList())),
                 )),
-            Divider(color: Colors.grey),
+            const Divider(color: Colors.grey),
             Expanded(
                 child: ListView(
+                  padding: const EdgeInsets.only(bottom: 30),
                     children:
-                        [1, 2, 3].map<Widget>((e) => HomeCard()).toList()))
+                        [1, 2, 3].map<Widget>((e) => HomeCard(onTap: ()=>homecontroller.onCardClick(e),)).toList()))
           ],
         ),
       ),

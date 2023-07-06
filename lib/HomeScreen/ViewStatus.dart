@@ -10,8 +10,9 @@ class StatusScreen extends StatelessWidget {
   StatusScreen({super.key, required this.imageUrl}) {
     Timer.periodic(const Duration(milliseconds: 250), (Timer t) {
       counter++;
-      if(counter.value>100){
+      if (counter.value > 100) {
         t.cancel();
+        Get.back();
       }
     });
   }
@@ -21,7 +22,7 @@ class StatusScreen extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         onTap: () => Get.back(),
-        onHorizontalDragUpdate: (details) =>Get.back(),
+        onHorizontalDragUpdate: (details) => Get.back(),
         child: Container(
             height: Get.height,
             width: double.infinity,
@@ -41,7 +42,7 @@ class StatusScreen extends StatelessWidget {
                       )),
                   Expanded(
                       flex: 4,
-                      child: Image.asset(
+                      child: Image.network(
                         imageUrl,
                         fit: BoxFit.fill,
                       )),
@@ -56,7 +57,7 @@ class StatusScreen extends StatelessWidget {
                     top: 0,
                     child: Obx(() => Container(
                         color: Colors.red,
-                        height:Get.height*(counter.value.toDouble()/100),
+                        height: Get.height * (counter.value.toDouble() / 100),
                         width: 10))),
                 Positioned(
                     left: 10,
@@ -67,13 +68,14 @@ class StatusScreen extends StatelessWidget {
                             minHeight: 0,
                             maxHeight: 10,
                             minWidth: 0,
-                            maxWidth: Get.width*(counter.value.toDouble()/100))))),
+                            maxWidth: Get.width *
+                                (counter.value.toDouble() / 100))))),
                 Positioned(
                     bottom: 10,
                     right: 0,
                     child: Obx(() => Container(
                         color: Colors.red,
-                        height: Get.height*(counter.value.toDouble()/100),
+                        height: Get.height * (counter.value.toDouble() / 100),
                         width: 10))),
                 Positioned(
                     bottom: 0,
@@ -84,7 +86,8 @@ class StatusScreen extends StatelessWidget {
                             minHeight: 0,
                             maxHeight: 10,
                             minWidth: 0,
-                            maxWidth: Get.width*(counter.value.toDouble()/100))))),
+                            maxWidth: Get.width *
+                                (counter.value.toDouble() / 100))))),
               ],
             )),
       ),
