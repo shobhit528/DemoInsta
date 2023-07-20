@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tsttech/OTP/OTPView.dart';
+import 'package:chatapp/OTP/OTPController.dart';
+import 'package:chatapp/OTP/OTPView.dart';
 
 class OTPScreen extends StatelessWidget {
   @override

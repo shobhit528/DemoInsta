@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.tsttech" "\0"
-            VALUE "FileDescription", "tsttech" "\0"
+            VALUE "CompanyName", "com.chatapp" "\0"
+            VALUE "FileDescription", "chatapp" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tsttech" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.tsttech. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tsttech.exe" "\0"
-            VALUE "ProductName", "tsttech" "\0"
+            VALUE "InternalName", "chatapp" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.chatapp. All rights reserved." "\0"
+            VALUE "OriginalFilename", "chatapp.exe" "\0"
+            VALUE "ProductName", "chatapp" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 
 class CustomImageView extends StatelessWidget {
@@ -28,40 +30,55 @@ class CustomImageView extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                  padding: EdgeInsets.all(3),
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
-                      color: color?? Colors.transparent,
+                      color: color ?? Colors.transparent,
                       borderRadius: BorderRadius.circular(15),
                       border: border
                           ? Border.all(width: 2, color: Colors.red)
                           : null),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                     clipBehavior: Clip.hardEdge,
                     child: networkImage
-                        ? Image(
-                            image: NetworkImage(url!),
+                        ? SizedBox(
+                            height: 40.mobileFont(),
+                            width: 40.mobileFont(),
+                            child: CachedNetworkImage(
+                              imageUrl: url!,
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 1)),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
                           )
                         : Image.asset(
                             url!,
-                            height: 50,
-                            width: 50,
+                            height: 40.mobileFont(),
+                            width: 40.mobileFont(),
                           ),
                   ),
                 ),
                 showAddIcon
                     ? Positioned(
+                        bottom: 0,
+                        right: 0,
                         child: Icon(
                           Icons.add_box_rounded,
-                          size: 20,
+                          size: 15.mobileFont(),
                           color: Colors.amber,
-                        ),
-                        bottom: 0,
-                        right: 0)
-                    : SizedBox()
+                        ))
+                    : const SizedBox()
               ],
             ),
-            name != null ? Flexible(child: Text(name!)) : SizedBox(),
+            name != null
+                ? Flexible(
+                    child: Text(
+                    name!,
+                    style: TextStyle(fontSize: 12.mobileFont()),
+                  ))
+                : const SizedBox(),
           ])),
     );
   }

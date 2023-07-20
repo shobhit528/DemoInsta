@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,8 +21,7 @@ class AnimationState extends State<AnimationClass>
       controller = AnimationController(
         duration: const Duration(seconds: 2),
         vsync: this,
-      )
-        ..repeat(reverse: false);
+      )..repeat(reverse: false);
       _animation = CurvedAnimation(
         parent: controller,
         curve: Curves.linear,
@@ -123,16 +121,15 @@ class _BouncingLineState extends State<BouncingLine> {
       child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [2, 4, 2, 6, 2, 4, 2, 6, 2, 4, 2]
-              .map((e) =>
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5),
-                width: 20,
-                constraints: BoxConstraints(
-                    minHeight: 0, maxHeight: marginTop * e / 2),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(228, 200, 210 * e*2, 1),
-                    borderRadius: BorderRadius.circular(e * 2.toDouble())),
-              ))
+              .map((e) => Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    width: 20,
+                    constraints: BoxConstraints(
+                        minHeight: 0, maxHeight: marginTop * e / 2),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(228, 200, 210 * e * 2, 1),
+                        borderRadius: BorderRadius.circular(e * 2.toDouble())),
+                  ))
               .toList()),
     );
   }
@@ -233,5 +230,249 @@ class _BouncingBallState extends State<BouncingBall> {
       default:
         return Colors.pink;
     }
+  }
+}
+
+class SpinningAnimation extends StatefulWidget {
+  const SpinningAnimation({super.key});
+
+  @override
+  State<StatefulWidget> createState() => AnimationStateOne();
+}
+
+class AnimationStateOne extends State<SpinningAnimation>
+    with TickerProviderStateMixin {
+  Animation<double>? _angleAnimation, _angleAnimation2;
+
+  Animation<double>? _scaleAnimation;
+
+  AnimationController? _controller, _controller2;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 3000), vsync: this);
+    _controller2 = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
+    _controller2?.stop();
+    _angleAnimation = Tween(begin: 0.0, end: 360.0).animate(_controller!)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+    _angleAnimation2 = Tween(begin: 0.0, end: 360.0).animate(_controller2!)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+    _scaleAnimation = Tween(begin: 1.0, end: 6.0).animate(_controller!)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+
+    _angleAnimation?.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller?.reverse();
+        _controller2?.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _controller?.forward();
+        _controller2?.forward();
+      }
+    });
+    _controller?.forward();
+
+    // _angleAnimation2?.addStatusListener((status) {
+    //   if (status == AnimationStatus.completed) {
+    //     _controller?.reset();
+    //   } else if (status == AnimationStatus.dismissed) {
+    //     _controller2?.forward();
+    //   }
+    // });
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    _controller2?.dispose();
+    super.dispose();
+  }
+
+  Widget _buildAnimation() {
+    double circleWidth = 130.0;
+    Widget circles = SizedBox(
+      width: circleWidth * 2.0,
+      height: circleWidth * 2.0,
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              _buildAnimationCircle(circleWidth, Colors.blue, scale: 1),
+              _buildAnimationCircle(circleWidth, Colors.red, scale: 1),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              _buildAnimationCircle(circleWidth, Colors.yellow,
+                  scaleY: -1, scale: -1),
+              _buildAnimationCircle(circleWidth, Colors.green, scaleY: -1),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    double angleInDegrees = _angleAnimation!.value;
+    return Transform.rotate(
+      angle: angleInDegrees / 360 * 2 * 22 / 7,
+      child: Container(
+        child: circles,
+      ),
+    );
+  }
+
+  Widget _buildAnimationCircle(double circleWidth, Color color,
+      {double scale = -1, double scaleY = 1}) {
+    Widget circles = _buildImageCircle(circleWidth, Colors.blue,
+        scale: scale, scaleY: scaleY);
+    double angleInDegrees = _angleAnimation2!.value;
+    return Transform.rotate(
+      angle: angleInDegrees / 360 * 2 * 22 / 7,
+      child: Container(
+        child: circles,
+      ),
+    );
+  }
+
+  Widget _buildImageCircle(double circleWidth, Color color,
+      {double scale = -1, double scaleY = 1}) {
+    return Transform.scale(
+      scaleX: scale,
+      scaleY: scaleY,
+      child: Transform.rotate(
+        angle: _controller2!.value,
+        child: Container(
+          width: circleWidth,
+          height: circleWidth,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+          ),
+          clipBehavior: Clip.hardEdge,
+          child: Image.asset("assets/images/loadimg.png", fit: BoxFit.fill),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.loose,
+      alignment: Alignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 150),
+          child: _buildAnimation(),
+        ),
+        Container(
+          height: Get.height,
+          width: Get.width,
+          color: Colors.black54,
+          child: Center(child: _buildAnimation()),
+        ),
+      ],
+    );
+  }
+}
+
+class FlyingAnimation extends StatefulWidget {
+  const FlyingAnimation({super.key});
+
+  @override
+  State<StatefulWidget> createState() => FlyingAnimationOne();
+}
+
+class FlyingAnimationOne extends State<FlyingAnimation>
+    with TickerProviderStateMixin {
+  Animation<double>? _angleAnimation;
+
+  AnimationController? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 3000), vsync: this);
+    _angleAnimation = Tween(begin: 360.0, end: 0.0).animate(_controller!)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+
+    _angleAnimation?.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller?.repeat();
+      } else if (status == AnimationStatus.dismissed) {
+        _controller?.forward();
+      }
+    });
+    _controller?.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  Widget _buildAnimation() {
+    double circleWidth = 130.0;
+    return Transform.rotate(
+      // angle: _angleAnimation!.value / 360 * 2 * 22 / 7,
+      angle: 0,
+      child: Transform.rotate(
+        angle: 0,
+        child: SizedBox(
+          width: circleWidth * 2.0,
+          height: circleWidth * 2.0,
+          child: Container(
+            width: circleWidth,
+            height: circleWidth,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: Image.asset("assets/images/bird_bg.gif", fit: BoxFit.fill),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.loose,
+      alignment: Alignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 150),
+          child: _buildAnimation(),
+        ),
+        Container(
+          height: Get.height,
+          width: Get.width,
+          color: Colors.black54,
+          child: Center(child: _buildAnimation()),
+        ),
+      ],
+    );
   }
 }

@@ -1,14 +1,11 @@
+import 'package:chatapp/Get_IT.dart';
+import 'package:chatapp/Login/LoginScreen.dart';
+import 'package:chatapp/ProfileScreen/ProfileController.dart';
+import 'package:chatapp/UI_Utils.dart';
+import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:tsttech/Get_IT.dart';
-import 'package:tsttech/HomeScreen/HomeController.dart';
-import 'package:tsttech/Login/LoginScreen.dart';
-import 'package:tsttech/ProfileImage.dart';
-import 'package:tsttech/ProfileScreen/ProfileController.dart';
-import 'package:tsttech/UtilsController.dart';
-import 'package:tsttech/main.dart';
 
 class ProfileView extends StatelessWidget {
   final profileController = ProfileController();
@@ -49,7 +46,7 @@ class ProfileView extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
                                 color: Color.fromRGBO(249, 179, 109, 1)),
-                            child: Text(
+                            child: const Text(
                               "Follow",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -67,7 +64,7 @@ class ProfileView extends StatelessWidget {
                                 border: Border.all(
                                     color: Color.fromRGBO(249, 179, 109, 1),
                                     width: 1)),
-                            child: Text(
+                            child: const Text(
                               "Message",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -176,7 +173,8 @@ class ProfileView extends StatelessWidget {
 }
 
 Widget ProfielBanner({String? str}) => Container(
-      height: Get.height / 2.7,
+      constraints: BoxConstraints(
+          minHeight: Get.height / 2.7, maxHeight: Get.height / 2.2),
       width: Get.width,
       padding: EdgeInsets.all(10),
       child: Stack(
@@ -184,51 +182,73 @@ Widget ProfielBanner({String? str}) => Container(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           children: [
             Column(children: [
-              Image.asset("assets/images/cover_image.png",
-                  width: Get.width, fit: BoxFit.fill),
               Expanded(
+                  flex: UiUtils().isMobile() ? 4 : 6,
+                  child: Image.asset("assets/images/cover_image.png",
+                      width: Get.width, fit: BoxFit.fill)),
+              Flexible(
+                  flex: 1,
                   child: Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Row(children: [
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.only(right: 30),
-                    child:  Column(children: [
-                      Text("32k",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22)),
-                      Text("Followers",
-                          style: TextStyle(fontSize: 20, color: Colors.grey))
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Row(children: [
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            padding: const EdgeInsets.only(right: 30),
+                            child: Column(children: const [
+                              Flexible(
+                                child: Text("32k",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 22)),
+                              ),
+                              Flexible(
+                                child: Text("Followers",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey)),
+                              )
+                            ]),
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            padding: EdgeInsets.only(left: 30),
+                            child: Column(children: const [
+                              Flexible(
+                                child: Text("320",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 22)),
+                              ),
+                              Flexible(
+                                child: Text("Following",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.grey)),
+                              )
+                            ]),
+                          )),
                     ]),
                   )),
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.only(left: 30),
-                    child: Column(children: [
-                      Text("320",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22)),
-                      Text("Following",
-                          style: TextStyle(fontSize: 20, color: Colors.grey))
+              Flexible(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Column(children: const [
+                      Flexible(
+                          child: Text("Jenny Wilson",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24))),
+                      Flexible(
+                          child: Text("Sr. Product Manager",
+                              style:
+                                  TextStyle(fontSize: 22, color: Colors.grey))),
                     ]),
                   )),
-                ]),
-              )),
-              Expanded(
-                  child: Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Column(children: [
-                  Expanded(
-                      child: Text("Jenny Wilson",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24))),
-                  Expanded(
-                      child: Text("Sr. Product Manager",
-                          style: TextStyle(fontSize: 22, color: Colors.grey))),
-                ]),
-              )),
             ]),
-            ProfileViewImage()
+            Positioned(
+              bottom: 100,
+              child: ProfileViewImage(),
+            )
           ]),
     );
 

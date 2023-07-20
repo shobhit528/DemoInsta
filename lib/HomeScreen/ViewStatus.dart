@@ -1,20 +1,15 @@
 import 'dart:async';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:chatapp/HomeScreen/AnimationClass.dart';
 
 class StatusScreen extends StatelessWidget {
   String imageUrl;
   var counter = 0.obs;
 
   StatusScreen({super.key, required this.imageUrl}) {
-    Timer.periodic(const Duration(milliseconds: 250), (Timer t) {
-      counter++;
-      if (counter.value > 100) {
-        t.cancel();
-        Get.back();
-      }
-    });
+
   }
 
   @override
@@ -41,11 +36,49 @@ class StatusScreen extends StatelessWidget {
                         color: Colors.transparent,
                       )),
                   Expanded(
+                    flex: 4,
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      imageBuilder: (context, imageProvider) {
+                        Timer.periodic(const Duration(milliseconds: 250), (Timer t) {
+                          counter++;
+                          if (counter.value > 100) {
+                            t.cancel();
+                            Get.back();
+                          }
+                        });
+                        return Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.red, BlendMode.colorBurn)),
+                          ),
+                        );
+                      },
+                      placeholder: (context, url) => const SpinningAnimation(),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                    ),
+                  ),
+                  /*Expanded(
                       flex: 4,
                       child: Image.network(
                         imageUrl,
                         fit: BoxFit.fill,
-                      )),
+                        loadingBuilder:
+                            (context, child, ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator(
+                              strokeWidth: 1,
+                              color: Colors.black,
+                            ));
+                          }
+                        },
+                      )),*/
                   Expanded(
                       flex: 1,
                       child: Container(

@@ -1,17 +1,16 @@
+import 'package:chatapp/Get_IT.dart';
+import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:tsttech/Get_IT.dart';
-import 'package:tsttech/main.dart';
 
 import 'LoginController.dart';
 
 class LoginView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: Get.height,
         width: Get.width,
         child: Column(
@@ -20,13 +19,11 @@ class LoginView extends StatelessWidget {
           children: [
             Flexible(
               child: SizedBox(
-                child: Image.asset(
-                  "assets/images/main_image.png",
-                  height: 200,
-                  width: 200,
-                ),
                 height: 300,
                 width: 300,
+                child: Image.network(
+                  "".randomImage(200, 200),
+                ),
               ),
             ),
             const Flexible(
@@ -39,10 +36,10 @@ class LoginView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       shape: BoxShape.rectangle,
                       color: Colors.grey.shade300),
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: TextFormField(
-                    controller: getIt<LoginController>().controller,
-                    decoration: InputDecoration(
+                    controller:context.read<LoginBloc>().controller,
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Mobile Number",
                         contentPadding: EdgeInsets.only(left: 10)),
@@ -54,14 +51,15 @@ class LoginView extends StatelessWidget {
                 child: SizedBox(
                   child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.amber),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.amber),
                       ),
-                      onPressed: () => getIt<LoginController>().verifyAuth(),
+                      onPressed: () => context.read<LoginBloc>().verifyAuth(),
                       child: const Text("Send OTP")),
                 ),
               ),
             ),
-            Flexible(
+            /*Flexible(
               child: Container(
                 margin: const EdgeInsets.only(top: 40),
                 child: SizedBox(
@@ -73,7 +71,7 @@ class LoginView extends StatelessWidget {
                       child: Text("Test network connection with postgres")),
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

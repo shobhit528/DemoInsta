@@ -1,8 +1,9 @@
+import 'package:chatapp/ChatScreen/ChatController.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tsttech/HomeScreen/HomeController.dart';
-import 'package:tsttech/Login/LoginController.dart';
-import 'package:tsttech/OTP/OTPController.dart';
-import 'package:tsttech/UtilsController.dart';
+import 'package:chatapp/HomeScreen/HomeController.dart';
+import 'package:chatapp/Login/LoginController.dart';
+import 'package:chatapp/OTP/OTPController.dart';
+import 'package:chatapp/UtilsController.dart';
 
 final getIt = GetIt.instance;
 
@@ -13,6 +14,7 @@ class GetItClass {
     getIt.registerSingleton<HomeController>(HomeController());
     getIt.registerSingleton<LoginController>(LoginController());
     getIt.registerSingleton<OTPController>(OTPController());
+    getIt.registerSingleton<ChatController>(ChatController());
     // GetIt.I.registerLazySingleton<RESTAPI>(() =>RestAPIImplementation());
   }
 }

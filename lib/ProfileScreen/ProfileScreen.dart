@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tsttech/ProfileScreen/ProfileView.dart';
+import 'package:chatapp/ProfileScreen/ProfileView.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
