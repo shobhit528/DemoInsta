@@ -6,8 +6,8 @@ import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:provider/provider.dart';
 
+import 'HomeScreen/HomeController.dart';
 import 'OTP/OTPController.dart';
 
 void main() {
@@ -27,17 +27,23 @@ void main() {
       //   ],
       //   child: MyApp(value),
       // ),
-        MultiBlocProvider(
-          providers: [
-            BlocProvider<LoginBloc>(
-              create: (BuildContext context) => LoginBloc(),
-            ),
-            BlocProvider<OTPBloc>(
-              create: (BuildContext context) => OTPBloc(context: context),
-            ),
-          ],
-          child: MyApp(value),
-        )
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<LoginBloc>(
+            lazy: false,
+            create: (BuildContext context) => LoginBloc(context: context),
+          ),
+          BlocProvider<OTPBloc>(
+            lazy: true,
+            create: (BuildContext context) => OTPBloc(context: context),
+          ),
+          BlocProvider<HomeBloc>(
+            lazy: false,
+            create: (BuildContext context) => HomeBloc(context: context),
+          ),
+        ],
+        child: MyApp(value),
+      ),
     );
   });
 }
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'InstaBuzz',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

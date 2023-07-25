@@ -1,23 +1,22 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp/ProfileImage.dart';
 import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import 'HomeController.dart';
 
 class HomeCard extends StatelessWidget {
-  Color color = Colors.black;
-  HomeController controller;
-  feedCardClass feedCard;
+  final Color color = Colors.black;
+  final feedCardClass feedCard;
 
-  HomeCard({super.key, required this.controller, required this.feedCard});
+  const HomeCard({super.key, required this.feedCard});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => controller.onCardClick(feedCard),
+      onTap: () => context.read<HomeBloc>().onCardClick(feedCard),
       behavior: HitTestBehavior.deferToChild,
       child: Container(
         height: (Get.height / 2.8).mobileFont(),
@@ -26,7 +25,7 @@ class HomeCard extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
               // image: ExactAssetImage("assets/images/main_image.png"),
-              image:NetworkImage(feedCard.feedImage),
+              image: NetworkImage(feedCard.feedImage),
               fit: BoxFit.fill),
           color: Colors.black26,
           borderRadius: BorderRadius.circular(15.mobileFont()),
@@ -61,7 +60,12 @@ class HomeCard extends StatelessWidget {
                                   children: [
                                     Animate(
                                         effects: const [
-                                          ScaleEffect(begin: Offset(0, 0),end: Offset(1, 1),curve: Curves.ease,duration: Duration(seconds: 3),alignment: Alignment.center)
+                                          ScaleEffect(
+                                              begin: Offset(0, 0),
+                                              end: Offset(1, 1),
+                                              curve: Curves.ease,
+                                              duration: Duration(seconds: 3),
+                                              alignment: Alignment.center)
                                           // ColorEffect(
                                           //     duration: Duration(seconds: 5),
                                           //     delay: Duration(seconds: 1),
@@ -187,11 +191,29 @@ class HomeCard extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     flex: 1,
-                                    child: iconTitleRow(
-                                        Icons.favorite_border,
-                                        feedCard.likes,
-                                        () =>
-                                            controller.onButtonClick(feedCard)),
+                                    child: BlocConsumer(
+                                      listener: (context, state) {
+                                        
+                                        context
+                                            .read<HomeBloc>()
+                                            .emit("");
+
+                                        return;
+                                      },
+                                      bloc: HomeBloc(context: context),
+                                      builder: (context, state) => iconTitleRow(
+                                          context.read<HomeBloc>().isLiked(
+                                                  context
+                                                      .read<HomeBloc>()
+                                                      .feedList
+                                                      .indexOf(feedCard))
+                                              ? Icons.favorite_border
+                                              : Icons.favorite,
+                                          feedCard.likes,
+                                          () => context
+                                              .read<HomeBloc>()
+                                              .onButtonClick(feedCard)),
+                                    ),
                                   ),
                                   Expanded(
                                       flex: 1,

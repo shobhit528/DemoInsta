@@ -27,6 +27,8 @@ class UiUtils {
 
   bool isMobile() => deviceMode() == Screen.mobile;
 
+  bool isWeb() => deviceMode() == Screen.web;
+
   static Screen deviceMode() {
     final width = MediaQuery.of(Get.context!).size.width;
     if (width <= 599) {

@@ -11,9 +11,6 @@ class GetItClass {
 
   void setup() {
     getIt.registerSingleton<UtilsController>(UtilsController());
-    getIt.registerSingleton<HomeController>(HomeController());
-    getIt.registerSingleton<LoginController>(LoginController());
-    getIt.registerSingleton<OTPController>(OTPController());
     getIt.registerSingleton<ChatController>(ChatController());
     // GetIt.I.registerLazySingleton<RESTAPI>(() =>RestAPIImplementation());
   }
@@ -28,3 +25,7 @@ class DemoClass {
 
   DemoClass._internal();
 }
+
+
+
+

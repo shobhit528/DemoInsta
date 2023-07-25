@@ -2,10 +2,15 @@ import 'package:chatapp/HomeScreen/AnimationClass.dart';
 import 'package:chatapp/HomeScreen/ViewStatus.dart';
 import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:rnd/rnd.dart';
 
-class HomeController extends GetxController {
+class HomeBloc extends Cubit {
+  HomeBloc({Key, required this.context}) : super(Key);
+  BuildContext context;
+  TextEditingController controller = TextEditingController();
+
   RxInt currentClick = 10.obs;
   RxList<User> list = <User>[
     User("Sam",
@@ -24,7 +29,8 @@ class HomeController extends GetxController {
         color: Colors.blueAccent.shade100)
   ].obs;
 
-  RxList<feedCardClass> feedList = <feedCardClass>[
+  bool isLiked(int index) => feedList[index].isLiked;
+  List<feedCardClass> feedList = <feedCardClass>[
     feedCardClass(
         feedImage: "https://picsum.photos/2048/2048".randomBlur(),
         image: "https://picsum.photos/50/50".random(),
@@ -52,7 +58,7 @@ class HomeController extends GetxController {
         messages: rnd.getInt(0, 100).toString(),
         shared: rnd.getInt(0, 100).toString(),
         saved: rnd.getInt(0, 100).toString())
-  ].obs;
+  ];
 
   onClickStatus(User user) => showDialog(
         context: Get.context!,
@@ -65,7 +71,7 @@ class HomeController extends GetxController {
     return showDialog(
       context: Get.context!,
       builder: (context) {
-        switch (feedList.value.indexOf(e) + 1) {
+        switch (feedList.indexOf(e) + 1) {
           case 1:
             return const BouncingLine();
           case 2:
@@ -82,14 +88,12 @@ class HomeController extends GetxController {
   }
 
   onButtonClick(feedCardClass e) {
-    currentClick.value = feedList.value.indexOf(e);
+    currentClick.value = feedList.indexOf(e);
     e.isLiked = true;
-    feedList.value[currentClick.value] = e;
+    feedList[currentClick.value] = e;
     feedList = feedList;
-    notifyChildrens();
     Future.delayed(const Duration(seconds: 5), () {
       currentClick.value = 10;
-      notifyChildrens();
     });
   }
 }
@@ -101,7 +105,8 @@ class User {
   String? statusImage;
   bool networkImage;
 
-  User(this.name, {this.imageUrl, this.color, this.statusImage,this.networkImage=false});
+  User(this.name,
+      {this.imageUrl, this.color, this.statusImage, this.networkImage = false});
 }
 
 class feedCardClass {
@@ -124,5 +129,5 @@ class feedCardClass {
       this.messages = "",
       this.shared = "",
       this.saved = "",
-      this.isLiked = false});
+      this.isLiked = true});
 }

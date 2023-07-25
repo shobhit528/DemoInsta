@@ -7,80 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../OTP/OTPScreen.dart';
 
-class LoginController extends GetxController implements VerifyAuth {
-  late String vId;
-  TextEditingController controller = TextEditingController();
-
-  void verifyAuth() async {
-    if (controller.text.toString().trim().isEmpty) {
-      Get.snackbar("Wrong Number", "Please enter valid mobile number");
-    } else if (controller.text.toString().trim().length < 10) {
-      Get.snackbar("Wrong Number", "Please enter valid mobile number");
-    } else {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+91 ${controller.text.toString().trim()}',
-        verificationCompleted: onVerificationCompleted,
-        verificationFailed: verificationFailed,
-        codeSent: onCodeSent,
-        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-      );
-    }
-  }
-
-  void asyncTask() async {
-    // Isolate.spawn<IsolateModel>(heavyTask, IsolateModel(355000, 50000000));
-    // Isolate.spawn<IsolateModel>(heavyTask2, IsolateModel(1, 1));
-    // heavyTask2();
-
-    print("sad");
-    print(Provider.of<DemoProvider>(Get.context!, listen: false).DemoAppName);
-    Provider.of<DemoProvider>(Get.context!, listen: false).DemoAppName =
-        "New Name";
-    print(Provider.of<DemoProvider>(Get.context!, listen: false).DemoAppName);
-  }
-
-  void heavyTask(IsolateModel model) {
-    int total = 0;
-
-    /// Performs an iteration of the specified count
-    for (int i = 1; i < model.iteration; i++) {
-      /// Multiplies each index by the multiplier and computes the total
-      total += (i * model.multiplier);
-    }
-
-    print("FINAL TOTAL: $total");
-  }
-
-  void heavyTask2({IsolateModel? model}) async {
-    // var url = 'localhost/test/5432';
-    // var client = PostgrestClient(url);
-    // var response = await client.from('person').select().execute();
-    // print(response);
-  }
-
-  @override
-  codeAutoRetrievalTimeout(String verificationId) {
-    Get.snackbar("ee", verificationId);
-  }
-
-  @override
-  onCodeSent(String verificationId, int? resendToken) {
-    vId = verificationId;
-    Get.to(() => OTPScreen());
-  }
-
-  @override
-  onVerificationCompleted(PhoneAuthCredential credential) {
-    Get.snackbar("e.code", credential.toString());
-  }
-
-  @override
-  verificationFailed(FirebaseAuthException e) {
-    Get.snackbar(e.code, e.message.toString());
-    print(e.message);
-  }
-}
-
 abstract class VerifyAuth {
   onVerificationCompleted(PhoneAuthCredential credential);
 
@@ -99,8 +25,9 @@ class IsolateModel {
 }
 
 class LoginBloc extends Cubit implements VerifyAuth {
-  LoginBloc({Key}) : super(Key);
+  LoginBloc({Key,required this.context}) : super(Key);
 
+  BuildContext context;
   late String vId;
   TextEditingController controller = TextEditingController();
 
@@ -128,7 +55,7 @@ class LoginBloc extends Cubit implements VerifyAuth {
   @override
   onCodeSent(String verificationId, int? resendToken) {
     vId = verificationId;
-    Get.to(() => OTPScreen());
+    Get.to(() => const OTPScreen());
   }
 
   @override

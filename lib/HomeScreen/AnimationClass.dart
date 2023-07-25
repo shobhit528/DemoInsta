@@ -391,7 +391,9 @@ class AnimationStateOne extends State<SpinningAnimation>
 }
 
 class FlyingAnimation extends StatefulWidget {
-  const FlyingAnimation({super.key});
+  Color? bgColor, circleColor;
+
+  FlyingAnimation({super.key, this.bgColor=Colors.black54, this.circleColor});
 
   @override
   State<StatefulWidget> createState() => FlyingAnimationOne();
@@ -445,8 +447,9 @@ class FlyingAnimationOne extends State<FlyingAnimation>
           child: Container(
             width: circleWidth,
             height: circleWidth,
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
               shape: BoxShape.circle,
+              color: widget.circleColor??Colors.transparent
             ),
             clipBehavior: Clip.hardEdge,
             child: Image.asset("assets/images/bird_bg.gif", fit: BoxFit.fill),
@@ -469,7 +472,7 @@ class FlyingAnimationOne extends State<FlyingAnimation>
         Container(
           height: Get.height,
           width: Get.width,
-          color: Colors.black54,
+          color: widget.circleColor == null ? Colors.black54 : widget.bgColor,
           child: Center(child: _buildAnimation()),
         ),
       ],

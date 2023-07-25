@@ -9,9 +9,9 @@ import 'package:chatapp/HomeScreen/HomeScreen.dart';
 import 'package:chatapp/ProfileScreen/ProfileScreen.dart';
 
 class BottomTabView extends StatelessWidget {
-  var selectedpage = 2.obs;
+  var selectedpage = 4.obs;
   final _pageNo = [
-    const FlyingAnimation(),
+     FlyingAnimation(),
     // const SpinningAnimation(),
     OrientationBuilder(builder: (context, orientation) => Container(color:Colors.black,height: Get.height,width: Get.width,child: UiUtils().rainWidget(childWidget: SizedBox()),)),
     HomeScreen(),
