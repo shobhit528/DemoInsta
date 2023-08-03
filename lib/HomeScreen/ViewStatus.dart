@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:chatapp/HomeScreen/AnimationClass.dart';
+import 'package:chatapp/Animations/AnimationClass.dart';
 
 class StatusScreen extends StatelessWidget {
   String imageUrl;
@@ -52,8 +52,7 @@ class StatusScreen extends StatelessWidget {
                             image: DecorationImage(
                                 image: imageProvider,
                                 fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.red, BlendMode.colorBurn)),
+                                colorFilter: const ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
                           ),
                         );
                       },

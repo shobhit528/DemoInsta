@@ -1,5 +1,6 @@
-import 'package:chatapp/HomeScreen/AnimationClass.dart';
+import 'package:chatapp/Animations/AnimationClass.dart';
 import 'package:chatapp/HomeScreen/ViewStatus.dart';
+import 'package:chatapp/UI_Utils.dart';
 import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,6 +97,8 @@ class HomeBloc extends Cubit {
       currentClick.value = 10;
     });
   }
+
+  onSendClick(feedCardClass e) => UiUtils().showDialogSending(e,context);
 }
 
 class User {

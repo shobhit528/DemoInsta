@@ -29,13 +29,13 @@ class LoginView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Flexible(
+                      const Flexible(
                         child: SizedBox(
                           height: 300,
                           width: 300,
-                          child: Image.network(
+                          /*child: Image.network(
                             imageCenter,
-                          ),
+                          ),*/
                         ),
                       ),
                       const Flexible(
@@ -73,6 +73,8 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
                       ),
+
+
                       /*Flexible(
                     child: Container(
                       margin: const EdgeInsets.only(top: 40),

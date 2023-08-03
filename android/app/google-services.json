@@ -30,7 +30,7 @@
           }
         },
         {
-          "client_id": "14533017152-h5v7ctn6080uk5jhd6h3uhiqt5j27qov.apps.googleusercontent.com",
+          "client_id": "14533017152-im8tnd4fi9p14p3drkjp8dggcmpmt66s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -45,6 +45,13 @@
             {
               "client_id": "14533017152-h5v7ctn6080uk5jhd6h3uhiqt5j27qov.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "14533017152-0akkpm0acrts5jh9gkaj925a9v25f273.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.instaClone.app"
+              }
             }
           ]
         }

@@ -26,7 +26,7 @@ class CustomImageView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-            Stack(
+            Expanded(child: Stack(
               alignment: Alignment.center,
               children: [
                 Container(
@@ -42,36 +42,36 @@ class CustomImageView extends StatelessWidget {
                     clipBehavior: Clip.hardEdge,
                     child: networkImage
                         ? SizedBox(
-                            height: 40.mobileFont(),
-                            width: 40.mobileFont(),
-                            child: CachedNetworkImage(
-                              imageUrl: url!,
-                              placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator(
-                                      strokeWidth: 1)),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          )
+                      height: 40.mobileFont(),
+                      width: 40.mobileFont(),
+                      child: CachedNetworkImage(
+                        imageUrl: url!,
+                        placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(
+                                strokeWidth: 1)),
+                        errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                      ),
+                    )
                         : Image.asset(
-                            url!,
-                            height: 40.mobileFont(),
-                            width: 40.mobileFont(),
-                          ),
+                      url!,
+                      height: 40.mobileFont(),
+                      width: 40.mobileFont(),
+                    ),
                   ),
                 ),
                 showAddIcon
                     ? Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Icon(
-                          Icons.add_box_rounded,
-                          size: 15.mobileFont(),
-                          color: Colors.amber,
-                        ))
+                    bottom: 0,
+                    right: 0,
+                    child: Icon(
+                      Icons.add_box_rounded,
+                      size: 15.mobileFont(),
+                      color: Colors.amber,
+                    ))
                     : const SizedBox()
               ],
-            ),
+            )),
             name != null
                 ? Flexible(
                     child: Text(

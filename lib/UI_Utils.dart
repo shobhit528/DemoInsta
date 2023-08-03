@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:particle_field/particle_field.dart';
 import 'package:rnd/rnd.dart';
 
+import 'HomeScreen/HomeController.dart';
+
 class UiUtils {
   Widget circularBorderImage(
           {String? url, double? radius = 45, double borderWidth = 2}) =>
@@ -40,9 +42,110 @@ class UiUtils {
     }
   }
 
+  showDialogSending(feedCardClass userFeed, BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text("Compose a message"),
+              content: SizedBox(
+                width: Get.width,
+                height: Get.height / 2,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                          child: Card(
+                        elevation: 3,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 3, color: Colors.grey)),
+                          child: TextFormField(
+                            controller: controller,
+                            maxLines: 3,decoration: const InputDecoration(border: InputBorder.none),
+                            keyboardType: TextInputType.multiline,
+                          ),
+                        ),
+                      )),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        flex: 6,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                              quickSendRow(name: userFeed.name),
+                            ],
+                          ),
+                        ),
+                      )
+                    ]),
+              ),
+              actions: [OutlinedButton(onPressed: () {}, child: Text("Send"))],
+            ));
+  }
+
+  Widget quickSendRow({String? name = ""}) => Card(
+        elevation: 6,
+        margin: const EdgeInsets.all(5),
+        child: ListTile(
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          leading: Container(
+              width: 100,
+              alignment: Alignment.center,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              height: 40.0.mobileFont(),
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0.mobileFont()),
+                child: Image.network(
+                  "https://xsgames.co/randomusers/avatar.php?g=female",
+                  fit: BoxFit.cover,
+                ),
+              )),
+          title: Text("$name"),
+          trailing: Container(
+            width: 100,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                      offset: const Offset(0, 0),
+                      color: Colors.grey.shade100,
+                      blurRadius: 1)
+                ],
+                border: Border.all(color: Colors.blue, width: 1)),
+            child: const Icon(
+              Icons.send,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      );
+
   Widget customImageWidget(
-      {required Widget childWidget,
-      required AssetImage assetImage}) {
+      {required Widget childWidget, required AssetImage assetImage}) {
     SpriteSheet sparkleSpriteSheet = SpriteSheet(image: assetImage);
 
     final ParticleField starField = ParticleField(

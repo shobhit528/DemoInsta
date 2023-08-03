@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../Animations/AnimationClass.dart';
 import '../Get_IT.dart';
-import '../HomeScreen/AnimationClass.dart';
 import '../Login/LoginScreen.dart';
 import '../UtilsController.dart';
 
@@ -16,7 +16,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // _profileBloc.add(event)
     _profileBloc.add(ProfileInitialEvent());
     return BlocConsumer<ProfileBloc, ProfileState>(
         bloc: _profileBloc,
@@ -25,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.runtimeType) {
             case ProfileLoadingState:
+              return const Scaffold(body: SpinningAnimation());
               return Scaffold(
                   body: FlyingAnimation(
                 circleColor: Colors.black54,

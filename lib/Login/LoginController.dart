@@ -1,10 +1,7 @@
-import 'package:chatapp/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
 import '../OTP/OTPScreen.dart';
 
 abstract class VerifyAuth {
@@ -25,7 +22,7 @@ class IsolateModel {
 }
 
 class LoginBloc extends Cubit implements VerifyAuth {
-  LoginBloc({Key,required this.context}) : super(Key);
+  LoginBloc({Key, required this.context}) : super(Key);
 
   BuildContext context;
   late String vId;
@@ -46,6 +43,7 @@ class LoginBloc extends Cubit implements VerifyAuth {
       );
     }
   }
+
 
   @override
   codeAutoRetrievalTimeout(String verificationId) {

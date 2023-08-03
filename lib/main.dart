@@ -7,11 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'Animations/productView.dart';
 import 'HomeScreen/HomeController.dart';
 import 'OTP/OTPController.dart';
+import 'UiUtils/notification_controller.dart';
 
-void main() {
+Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  // await NotificationController.initializeLocalNotifications();
+
   try {
     GetItClass().setup();
   } catch (e) {}
@@ -33,6 +38,10 @@ void main() {
             lazy: false,
             create: (BuildContext context) => LoginBloc(context: context),
           ),
+          BlocProvider<CarouselCubit>(
+            lazy: false,
+            create: (BuildContext context) => CarouselCubit(),
+          ),
           BlocProvider<OTPBloc>(
             lazy: true,
             create: (BuildContext context) => OTPBloc(context: context),
@@ -50,13 +59,18 @@ void main() {
 
 class MyApp extends StatelessWidget {
   bool isLoggedIn;
+  static final GlobalKey<NavigatorState> navigatorKey =
+  GlobalKey<NavigatorState>();
 
-  MyApp(this.isLoggedIn, {Key? key}) : super(key: key);
+  MyApp(this.isLoggedIn, {Key? key}) : super(key: key){
+    // NotificationController.startListeningNotificationEvents();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'InstaBuzz',
+      key: navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

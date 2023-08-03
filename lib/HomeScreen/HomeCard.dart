@@ -1,4 +1,5 @@
 import 'package:chatapp/ProfileImage.dart';
+import 'package:chatapp/UI_Utils.dart';
 import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -36,10 +37,10 @@ class HomeCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Flexible(
-                  flex: 1,
+                  flex: UiUtils().isMobile() ? 2 : 1,
                   child: Container(
                     color: Colors.white54,
-                    padding: EdgeInsets.symmetric(horizontal: 10.mobileFont()),
+                    padding: EdgeInsets.symmetric(horizontal: 5.mobileFont()),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -193,10 +194,7 @@ class HomeCard extends StatelessWidget {
                                     flex: 1,
                                     child: BlocConsumer(
                                       listener: (context, state) {
-                                        
-                                        context
-                                            .read<HomeBloc>()
-                                            .emit("");
+                                        context.read<HomeBloc>().emit("");
 
                                         return;
                                       },
@@ -224,7 +222,9 @@ class HomeCard extends StatelessWidget {
                                   Expanded(
                                       flex: 1,
                                       child: iconTitleRow(
-                                          Icons.send, feedCard.shared, () {})),
+                                          Icons.send,
+                                          feedCard.shared,
+                                          () => UiUtils().showDialogSending(feedCard, context))),
                                   Expanded(
                                       flex: 1,
                                       child: iconTitleRow(Icons.bookmark_border,
