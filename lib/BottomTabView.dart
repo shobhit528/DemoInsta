@@ -8,14 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'ProductList/product_list.dart';
+import 'Shaders/Shader_Class.dart';
 
 class BottomTabView extends StatelessWidget {
   var selectedpage = 0.obs;
   final _pageNo = [
     // FlyingAnimation(),
     // const SpinningAnimation(),
-    GyroClass(),
-
+    // GyroClass(),
+    // ExampleAnimation(),
+    // PlayOneShotAnimation(),
+    // ShaderHomePage(),
+    CircularAnimation(),
     ProductScreen(),
     OrientationBuilder(
         builder: (context, orientation) => Container(

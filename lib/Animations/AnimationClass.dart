@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:ffi';
 
+import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:rive/rive.dart' as Rive;
 import 'dart:math';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -13,6 +16,8 @@ part 'bouncing_line.dart';
 part 'bouncing_ball.dart';
 part 'spinning_animation.dart';
 part 'gyronimation.dart';
+part 'rive_animation.dart';
+part 'circular_animation.dart';
 
 class AnimationClass extends StatefulWidget {
   const AnimationClass({super.key});
