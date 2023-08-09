@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   flutter_test:
-    name: Flutter test and Analyze
+    name: Flutter CI
     runs-on: Ubuntu-latest
     steps:
       - uses: actions/checkout@v2
