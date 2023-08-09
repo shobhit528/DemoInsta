@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - master
-  jobs:
+jobs:
     flutter_test:
       name: Flutter test and Analyze
       runs_on: Ubuntu-latest
