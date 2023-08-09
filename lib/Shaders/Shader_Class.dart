@@ -53,8 +53,8 @@ class _ShaderHomePageStateState extends State<ShaderHomePage> {
           alignment: Alignment.center,
           children: [
             Container(
-              height: MediaQuery.sizeOf(context).height,
-              width: MediaQuery.sizeOf(context).width,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: CustomPaint(painter: ShaderPainter(shader!, delta)),
             ),
             Center(child: Opacity(
@@ -63,8 +63,8 @@ class _ShaderHomePageStateState extends State<ShaderHomePage> {
                 child: Container(
                   margin: const EdgeInsets.only(top: 15,left: 10),
                   color: Colors.transparent,
-                  height: MediaQuery.sizeOf(context).height,
-                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
                   child: CustomPaint(painter: ShaderPainter(shader!, delta)),
                 )),)
           ]);

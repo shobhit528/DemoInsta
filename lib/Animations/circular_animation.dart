@@ -14,6 +14,14 @@ class _CircularAnimationState extends State<CircularAnimation>
   late Animation<double> _scaleUpDown;
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    animation.dispose();
+    animationController.dispose();
+  }
+
+  @override
   void initState() {
     animationController = AnimationController(
       vsync: this,
@@ -47,19 +55,19 @@ class _CircularAnimationState extends State<CircularAnimation>
         alignment: Alignment.center,
         child: AnimatedBuilder(
           animation: animationController,
-          builder: (context, child) => Stack(children: [
+          builder: (context, child) => Stack(fit: StackFit.loose, children: [
             Transform.rotate(
               angle: animationController.value * pi * 35.mobileFont(),
               child: SizedBox(
                 width: 100.mobileFont(),
                 child: Row(children: [
                   FadeTransition(
-                    opacity: animation,
+                    opacity: _fadeInFadeOut,
                     child: Transform.scale(
                       scale: _scaleUpDown.value,
                       child: Container(
-                          height: 15,
-                          width: 15,
+                          height: 15.mobileFont(),
+                          width: 15.mobileFont(),
                           decoration: const BoxDecoration(
                               color: Colors.green, shape: BoxShape.circle)),
                     ),

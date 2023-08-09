@@ -5,7 +5,6 @@ import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:rive/rive.dart' as Rive;
 import 'dart:math';
 import 'package:sensors_plus/sensors_plus.dart';
 

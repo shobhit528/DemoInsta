@@ -4,14 +4,11 @@ import 'package:chatapp/UtilsController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:rive/rive.dart';
-
 import 'LoginController.dart';
 
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    context.read<LoginBloc>().initRive();
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -48,17 +45,9 @@ class LoginView extends StatelessWidget {
                       //   ),
                       // ),
                       Flexible(
-                          child: RiveAnimation.asset(
-                        "assets/images/login_screen.riv",
-                        fit: BoxFit.fill,
-                      )),
-                      Flexible(
-                        child: GestureDetector(
-                          onTap: () => context.read<LoginBloc>().loginHit(),
-                          child: Text("Login",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
-                        ),
+                        child: Text("Login",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold)),
                       ),
                       Flexible(
                         child: Container(
