@@ -10,19 +10,20 @@ class _CircularAnimationState extends State<CircularAnimation>
   late AnimationController animationController;
 
   late AnimationController animation;
+
   late Animation<double> _fadeInFadeOut;
   late Animation<double> _scaleUpDown;
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     animation.dispose();
     animationController.dispose();
-  }
+    super.dispose();
 
+  }
   @override
   void initState() {
+    
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 20),
@@ -31,11 +32,13 @@ class _CircularAnimationState extends State<CircularAnimation>
     super.initState();
     animationController.forward();
     animationController.addListener(() {
-      setState(() {
-        if (animationController.status == AnimationStatus.completed) {
-          animationController.repeat();
-        }
-      });
+      try {
+        setState(() {
+          if (animationController.status == AnimationStatus.completed) {
+            animationController.repeat();
+          }
+        });
+      } catch (e) {}
     });
 
     animation = AnimationController(

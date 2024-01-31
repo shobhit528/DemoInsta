@@ -83,67 +83,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       Emitter<ProfileState> emit) async {
     emit(ProfileLoadingState());
     await Future.delayed(const Duration(seconds: 1));
-    List<Item> CardlistItem = <Item>[
-      Item(
-          url: "".randomImageWithOutDimention(hightScale: 2),
-          networkImage: true,
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 2,
-          color: Colors.pinkAccent.shade400),
-      Item(
-          url: "assets/images/image_two.png",
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 3,
-          color: AppThemeColor),
-      Item(
-          url: "assets/images/image_three.png",
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 2,
-          color: Colors.teal.shade100),
-      Item(
-          url: "assets/images/image_two.png",
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 1,
-          color: Colors.green.shade200),
-      Item(
-          url: "".randomImageWithOutDimention(),
-          networkImage: true,
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 1,
-          color: Colors.blueAccent.shade100),
-      Item(
-          url: "assets/images/image_profile.png",
-          crossAxisCellCount: 2,
-          mainAxisCellCount: 2,
-          color: Colors.deepPurple.shade200),
-      Item(
-          url: "".randomImageWithOutDimention(),
-          networkImage: true,
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 1,
-          color: Colors.pinkAccent.shade400),
-      Item(
-          url: "".randomImageWithOutDimention(),
-          networkImage: true,
-          crossAxisCellCount: 1,
-          mainAxisCellCount: 1,
-          color: const Color.fromRGBO(255, 123, 107, 1)),
-    ];
 
-    List<highLightClass> HeighLightlist = <highLightClass>[
-      highLightClass(
-          name: "Vacations",
-          url: "assets/images/image_two.png",
-          color: Colors.teal.shade100),
-      highLightClass(
-          name: "Parties",
-          url: "assets/images/image_three.png",
-          color: Colors.green.shade200),
-      highLightClass(
-          name: "LifeStyles",
-          url: "assets/images/image_profile.png",
-          color: Colors.blueAccent.shade100)
-    ];
+    List<Item> CardlistItem=CardlistDummy;
+    List<highLightClass> HeighLightlist=HeighLightlistDummy;
+
     await Future.delayed(const Duration(seconds: 1));
     emit(ProfileLoadSuccessState(CardlistItem, HeighLightlist));
   }
@@ -155,3 +98,64 @@ class ApiCall extends GetConnect {
       get("https://xsgames.co/randomusers/avatar.php?g=$gender");
 
 }
+List<Item> CardlistDummy = <Item>[
+  Item(
+      url: "".randomImageWithOutDimention(hightScale: 2),
+      networkImage: true,
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 2,
+      color: Colors.pinkAccent.shade400),
+  Item(
+      url: "assets/images/image_two.png",
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 3,
+      color: AppThemeColor),
+  Item(
+      url: "assets/images/image_three.png",
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 2,
+      color: Colors.teal.shade100),
+  Item(
+      url: "assets/images/image_two.png",
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 1,
+      color: Colors.green.shade200),
+  Item(
+      url: "".randomImageWithOutDimention(),
+      networkImage: true,
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 1,
+      color: Colors.blueAccent.shade100),
+  Item(
+      url: "assets/images/image_profile.png",
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      color: Colors.deepPurple.shade200),
+  Item(
+      url: "".randomImageWithOutDimention(),
+      networkImage: true,
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 1,
+      color: Colors.pinkAccent.shade400),
+  Item(
+      url: "".randomImageWithOutDimention(),
+      networkImage: true,
+      crossAxisCellCount: 1,
+      mainAxisCellCount: 1,
+      color: const Color.fromRGBO(255, 123, 107, 1)),
+];
+
+List<highLightClass> HeighLightlistDummy = <highLightClass>[
+  highLightClass(
+      name: "Vacations",
+      url: "assets/images/image_two.png",
+      color: Colors.teal.shade100),
+  highLightClass(
+      name: "Parties",
+      url: "assets/images/image_three.png",
+      color: Colors.green.shade200),
+  highLightClass(
+      name: "LifeStyles",
+      url: "assets/images/image_profile.png",
+      color: Colors.blueAccent.shade100)
+];

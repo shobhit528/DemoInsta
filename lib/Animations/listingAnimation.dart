@@ -31,7 +31,6 @@ class ListStateNew extends State<ListAnimation>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = AnimationController(
       duration: const Duration(

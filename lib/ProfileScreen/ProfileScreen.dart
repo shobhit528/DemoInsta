@@ -11,7 +11,6 @@ import '../UtilsController.dart';
 
 class ProfileScreen extends StatelessWidget {
   final ProfileBloc _profileBloc = ProfileBloc();
-
   ProfileScreen({super.key});
 
   @override

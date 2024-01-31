@@ -276,3 +276,7 @@ class UiUtils {
 }
 
 enum Screen { tablet, web, mobile }
+
+extension RangeList on int{
+  listRange() => List.generate(this - 0 + 1, (i) => i + 0);
+}

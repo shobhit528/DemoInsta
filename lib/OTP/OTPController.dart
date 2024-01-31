@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import '../BottomTabView.dart';
+import '../UiUtils/BottomTabView.dart';
 
 class OTPBloc extends Cubit implements VerifyAuth {
   OTPBloc({Key, required this.context, this.vId}) : super(Key);

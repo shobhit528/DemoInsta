@@ -5,28 +5,39 @@ import 'package:chatapp/UI_Utils.dart';
 import 'package:chatapp/UtilsController.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_isolate/flutter_isolate.dart';
 import 'package:get/get.dart';
 
-import 'ProductList/product_list.dart';
-import 'Shaders/Shader_Class.dart';
+import '../ListblocPage/list_bloc_page.dart';
+import '../ProductList/product_list.dart';
+import '../Shaders/Shader_Class.dart';
+import '../abstract_widget/new_page.dart';
+
+
+part 'page_slider.dart';
 
 class BottomTabView extends StatelessWidget {
   var selectedpage = 0.obs;
   final _pageNo = [
-    // FlyingAnimation(),
     // const SpinningAnimation(),
-    // GyroClass(),
-    // ExampleAnimation(),
     // PlayOneShotAnimation(),
-    // ShaderHomePage(),
-    CircularAnimation(),
+    PageSlider(children: [
+      BlocListPage(),
+      NewPage(),
+      DragAnimation(),
+      CircularAnimation(),
+      FlyingAnimation(),
+      GyroClass(),
+      const SpinningAnimation(),
+      ShaderHomePage(),
+    ]),
     ProductScreen(),
     OrientationBuilder(
         builder: (context, orientation) => Container(
               color: Colors.black,
               height: Get.height,
               width: Get.width,
-              child: UiUtils().rainWidget(childWidget: SizedBox()),
+              child: UiUtils().rainWidget(childWidget: const SizedBox()),
             )),
     HomeScreen(),
     OrientationBuilder(
@@ -34,7 +45,7 @@ class BottomTabView extends StatelessWidget {
               color: Colors.black,
               height: Get.height,
               width: Get.width,
-              child: UiUtils().birdWidget(childWidget: SizedBox()),
+              child: UiUtils().birdWidget(childWidget: const SizedBox()),
             )),
     ProfileScreen()
   ];

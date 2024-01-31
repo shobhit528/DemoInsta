@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileController extends GetxController {}
+// class ProfileController extends GetxController {}
 
 class Item {
   String? url;

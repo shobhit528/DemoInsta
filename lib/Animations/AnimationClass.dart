@@ -1,9 +1,11 @@
 import 'dart:async';
-import 'dart:ffi';
+import 'dart:isolate';
 
 import 'package:chatapp/UtilsController.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_isolate/flutter_isolate.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -17,6 +19,8 @@ part 'spinning_animation.dart';
 part 'gyronimation.dart';
 part 'rive_animation.dart';
 part 'circular_animation.dart';
+part 'drag_animation.dart';
+part 'waving_animation.dart';
 
 class AnimationClass extends StatefulWidget {
   const AnimationClass({super.key});
